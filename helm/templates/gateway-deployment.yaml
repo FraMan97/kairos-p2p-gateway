@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kairos-gateway
+spec:
+  replicas: {{ .Values.gateway.replicas }}
+  selector:
+    matchLabels:
+      app: kairos-gateway
+  template:
+    metadata:
+      labels:
+        app: kairos-gateway
+    spec:
+      containers:
+        - name: gateway
+          image: {{ .Values.gateway.image }}
+          imagePullPolicy: {{ .Values.gateway.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.gateway.port }}
+          env:
+            - name: PORT
+              value: "{{ .Values.gateway.port }}"
+            - name: KAIROS_NETWORK_URL
+              value: "{{ .Values.env.KAIROS_NETWORK_URL }}"
+            - name: KAIROS_EXPLORER_URL
+              value: "{{ .Values.env.KAIROS_EXPLORER_URL }}"

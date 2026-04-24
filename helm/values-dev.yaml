@@ -1,0 +1,9 @@
+env:
+  KAIROS_NETWORK_URL: "http://kairos-engine-api:80"
+  KAIROS_EXPLORER_URL: "http://kairos-explorer:8081"
+
+gateway:
+  image: kairos-gateway:local
+  pullPolicy: Never
+  replicas: 2
+  port: 3000
