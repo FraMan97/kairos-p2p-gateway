@@ -4,11 +4,11 @@
 ![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white)
 ![Helm](https://img.shields.io/badge/Helm-0F162D?style=for-the-badge&logo=helm&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-![License](https://img.shields.io/badge/License-GNU_AGPL_v3-blue?style=for-the-badge&logo=gnu&logoColor=white)
 
 The **Kairos P2P Gateway** is the official headless gateway for the **kairos-p2p-engine** ecosystem. It provides a unified, simplified REST API to interact with the decentralized Kairos storage network, handling file orchestration, cryptographic sealing, and network monitoring.
 
 > [!WARNING]
+> This repository is for portfolio and demonstration purposes only. The source code is copyrighted and no license is granted for its use, modification, or distribution.
 > This project is a Proof of Concept (POC) focused on backend infrastructure and is not intended for production environments without further security audits.
 
 ---
