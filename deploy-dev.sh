@@ -17,6 +17,8 @@ helm upgrade --install kairos-gateway ./helm -f ./helm/values-dev.yaml \
   --set gateway.image=kairos-gateway:local \
   --set gateway.pullPolicy=Never 
 
+kubectl rollout restart deployment/kairos-gateway
+
 # 4. Wait for Kubernetes to finish the job
 echo "Waiting for all pods to be ready (this may take a few seconds)..."
 kubectl rollout status deployment/kairos-gateway --timeout=120s
