@@ -8,6 +8,7 @@ import (
 type Config struct {
 	KairosNetworkURL  string
 	KairosExplorerURL string
+	KairosLedgerURL   string
 	Port              string
 }
 
@@ -24,6 +25,11 @@ func InitConfig() {
 		explorerURL = "http://kairos-explorer:8081"
 	}
 
+	ledgerURL := os.Getenv("KAIROS_LEDGER_URL")
+	if ledgerURL == "" {
+		ledgerURL = "http://kairos-ledger:80"
+	}
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "3000"
@@ -32,9 +38,10 @@ func InitConfig() {
 	AppConfig = &Config{
 		KairosNetworkURL:  kairosURL,
 		KairosExplorerURL: explorerURL,
+		KairosLedgerURL:   ledgerURL,
 		Port:              port,
 	}
 
-	log.Printf("[Config] Loaded: Network=%s, Explorer=%s, Port=%s",
-		AppConfig.KairosNetworkURL, AppConfig.KairosExplorerURL, AppConfig.Port)
+	log.Printf("[Config] Loaded: Network=%s, Explorer=%s, Ledger=%s, Port=%s",
+		AppConfig.KairosNetworkURL, AppConfig.KairosExplorerURL, AppConfig.KairosLedgerURL, AppConfig.Port)
 }

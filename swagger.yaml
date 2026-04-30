@@ -1,0 +1,104 @@
+openapi: 3.0.3
+info:
+  title: Kairos P2P - Gateway API
+  version: 1.0.0
+  description: Public headless gateway to interact with the Kairos decentralized storage network and ledger.
+servers:
+  - url: http://localhost:8086
+    description: Local Port-Forward Entry Point (Development)
+
+paths:
+  /put:
+    post:
+      summary: Upload and Seal a File
+      description: Uploads a file to the P2P network and asynchronously anchors its hash to the Ledger.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The file to be stored.
+                release_time:
+                  type: string
+                  format: date-time
+                  description: RFC3339 date/time when the file becomes decryptable.
+                hash:
+                  type: string
+                  description: Optional SHA-256 hash of the plain file + salt for Ledger Proof of Existence.
+      responses:
+        "200":
+          description: Upload initiated. Returns the unique File ID.
+
+  /get:
+    get:
+      summary: Download Reconstructed File
+      description: Retrieves shards from the network and reconstructs the original file.
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Binary stream of the reconstructed file.
+        "403":
+          description: Forbidden - Release time not yet reached.
+
+  /delete:
+    delete:
+      summary: Delete File
+      description: Removes the file manifest and shards from the network.
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: File successfully deleted.
+
+  /upload/status:
+    get:
+      summary: Check Upload Progress
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Current status of the file processing (processing, completed, error).
+
+  /receipt:
+    get:
+      summary: Download Ledger Receipt (OTS)
+      description: Retrieves the OpenTimestamps receipt for a previously anchored hash.
+      parameters:
+        - name: hash
+          in: query
+          required: true
+          description: The SHA-256 hash provided during the upload.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Binary stream of the .ots receipt file.
+        "202":
+          description: Receipt is still pending on the blockchain.
+        "404":
+          description: Hash not found.
+
+  /metrics:
+    get:
+      summary: Get Network Metrics
+      description: Returns aggregated real-time telemetry data for the P2P network.
+      responses:
+        "200":
+          description: A JSON object containing network health and storage metrics.

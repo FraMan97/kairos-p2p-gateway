@@ -33,6 +33,9 @@ The gateway implements and proxies the following endpoints:
 * `DELETE /delete?id=<file_id>`: Removes the file manifest and all associated shards from the network.
 * `GET /upload/status?id=<file_id>`: Checks the asynchronous processing status of an uploaded file.
 
+### Ledger (Proof of Existence)
+* `GET /receipt?hash=<hash>`: Retrieves the OpenTimestamps receipt (`.ots`) for a previously anchored hash from the Ledger.
+
 ### Monitoring
 * `GET /metrics`: Returns aggregated network health and storage metrics by querying the Kairos Explorer.
 
@@ -45,6 +48,7 @@ The gateway is configured via environment variables on values.yaml helm file:
 | `PORT` | Local port the gateway listens on | `3000` |
 | `KAIROS_NETWORK_URL` | URL of the Kairos Engine LoadBalancer/API | `http://kairos-engine-api:80` |
 | `KAIROS_EXPLORER_URL` | URL of the Kairos Explorer service | `http://kairos-explorer:8081` |
+| `KAIROS_LEDGER_URL` | URL of the Kairos Ledger service | `http://kairos-ledger:80` |
 
 ## Getting Started
 

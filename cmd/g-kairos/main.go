@@ -18,6 +18,7 @@ func main() {
 	mux.HandleFunc("/get", api.GetFile)
 	mux.HandleFunc("/delete", api.DeleteFile)
 	mux.HandleFunc("/upload/status", api.CheckUploadStatus)
+	mux.HandleFunc("/receipt", api.GetReceipt)
 
 	mux.HandleFunc("/metrics", api.GetNetworkMetrics)
 

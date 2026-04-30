@@ -25,3 +25,5 @@ spec:
               value: "{{ .Values.env.KAIROS_NETWORK_URL }}"
             - name: KAIROS_EXPLORER_URL
               value: "{{ .Values.env.KAIROS_EXPLORER_URL }}"
+            - name: KAIROS_LEDGER_URL
+              value: "{{ .Values.env.KAIROS_LEDGER_URL }}"

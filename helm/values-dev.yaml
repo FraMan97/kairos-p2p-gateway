@@ -1,6 +1,7 @@
 env:
   KAIROS_NETWORK_URL: "http://kairos-engine-api:80"
   KAIROS_EXPLORER_URL: "http://kairos-explorer:8081"
+  KAIROS_LEDGER_URL: "http://kairos-ledger:80"
 
 gateway:
   image: kairos-gateway:local
